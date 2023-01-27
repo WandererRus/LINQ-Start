@@ -35,7 +35,21 @@ namespace LINQ_Start
             var result3 = from human in humans where human.Age > 25 orderby human.Age ascending select human;
             foreach (Human h in result3)
             {
-                Console.WriteLine("Name: {0} \nJob:{1} \nAge:{2}\n", h.Name, h.Description, h.Age);
+                Console.WriteLine(h.ToString());
+            }
+            Console.WriteLine("---------------------------------------------------\n");
+
+            var result4 = from human in humans where human.Age > 25 orderby human.Age ascending select new { human.Name, human.Description };
+            foreach (var h in result4)
+            {
+                Console.WriteLine(h.Name + " " +  h.Description);
+            }
+            Console.WriteLine("---------------------------------------------------\n");
+
+            var result5 = from human in humans where human.Age > 25 orderby human.Age ascending select new Human (human.Name, human.Description, human.Age);
+            foreach (var h in result5)
+            {
+                Console.WriteLine(h);
             }
             Console.WriteLine("---------------------------------------------------\n");
             Console.ReadLine();
@@ -58,6 +72,10 @@ namespace LINQ_Start
             Name = name;
             Description = description;
             Age = age;
-        }  
+        }
+        public override string ToString()
+        {
+            return Name + Description + Age.ToString();
+        }
     }
 }
